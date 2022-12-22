@@ -54,7 +54,6 @@ const y = canvas.height / 2
 
 
 const player = new Player(x,y,30,'blue')
-player.draw()
 console.log(player)
 
 
@@ -66,6 +65,8 @@ const projectiles = []
 
 function animate() {
     requestAnimationFrame(animate)
+    c.clearRect(0,0,canvas.width,canvas.height)
+    player.draw()
     projectiles.forEach(projectile => {
         projectile.update()
     })
@@ -73,10 +74,13 @@ function animate() {
 }
 
 window.addEventListener('click', (event) => { // the click is translated into the event object that has many properties like the client x and y properties
-    projectiles.push(new Projectile(player.x,player.y,5,'red',{
-        x : 1,
-        y : 1
-    }))
+    const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
+    const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+    }    
+
+    projectiles.push(new Projectile(player.x,player.y,5,'red',velocity))
     console.log("FIRE")
 })
 
