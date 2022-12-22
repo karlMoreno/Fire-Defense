@@ -41,6 +41,7 @@ class Projectile {
     }// end of draw
 
     update() {
+        this.draw()
         this.x = this.x + this.velocity.x
         this.y = this.y + this.velocity.y
 
@@ -55,11 +56,8 @@ const y = canvas.height / 2
 const player = new Player(x,y,30,'blue')
 player.draw()
 console.log(player)
-const projectile = new Projectile(player.x, player.y, 5, 'red',
-     {
-        x:1,
-        y:2
-    }) //maybe we can use the x and y position of the player in the future because i want the player t eventually move
+
+
 
 
 const projectiles = []
@@ -69,13 +67,17 @@ const projectiles = []
 function animate() {
     requestAnimationFrame(animate)
     projectiles.forEach(projectile => {
-        projectiles.update()
+        projectile.update()
     })
 
 }
 
 window.addEventListener('click', (event) => { // the click is translated into the event object that has many properties like the client x and y properties
-    
+    projectiles.push(new Projectile(player.x,player.y,5,'red',{
+        x : 1,
+        y : 1
+    }))
+    console.log("FIRE")
 })
 
 animate()
