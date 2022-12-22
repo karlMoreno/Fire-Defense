@@ -7,6 +7,8 @@ const c = canvas.getContext('2d') //context for canvas api to do graphics for a 
 console.log(c)
 
 
+//------------------------------
+
 class Player {
     constructor(x,y,radius,color) {
         this.x = x
@@ -23,6 +25,31 @@ class Player {
 
     }// end of draw
 } // end of player
+
+class Enemy {
+    constructor(x, y, radius, color, velocity) {
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.color = color
+        this.velocity = velocity
+    }
+    draw() {
+        c.beginPath()
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+        c.fillStyle = this.color
+        c.fill()
+
+    }// end of draw
+
+    update() {
+        this.draw()
+        this.x = this.x + this.velocity.x
+        this.y = this.y + this.velocity.y
+
+    }
+
+}
 
 class Projectile {
     constructor(x, y, radius, color, velocity) {
@@ -49,6 +76,8 @@ class Projectile {
 
 }
 
+//-------------------------------
+
 const x = canvas.width / 2
 const y = canvas.height / 2
 
@@ -56,19 +85,36 @@ const y = canvas.height / 2
 const player = new Player(x,y,30,'blue')
 console.log(player)
 
-
-
-
 const projectiles = []
+const enemies = []
 
 
+//---------------------------------
+
+function spawnEnemies() {
+    setInterval(() => {
+        const x = 100
+        const y = 100
+        const radius = 30
+        const color = 'green'
+        velocity = {
+            x : 1,
+            y : 1
+        }
+        enemies.push(new Enemy(x,y,radius,color,velocity))
+    }, 1000)
+}
 
 function animate() {
     requestAnimationFrame(animate)
     c.clearRect(0,0,canvas.width,canvas.height)
     player.draw()
-    projectiles.forEach(projectile => {
+    projectiles.forEach((projectile) => {
         projectile.update()
+    })
+
+    enemies.forEach((enemy) => {
+        enemy.update()
     })
 
 }
@@ -85,3 +131,4 @@ window.addEventListener('click', (event) => { // the click is translated into th
 })
 
 animate()
+spawnEnemies()
