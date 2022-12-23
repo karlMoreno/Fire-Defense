@@ -123,8 +123,18 @@ function animate() {
     animationID = requestAnimationFrame(animate)
     c.clearRect(0,0,canvas.width,canvas.height)
     player.draw()
-    projectiles.forEach((projectile) => {
+    projectiles.forEach((projectile, index) => {
         projectile.update()
+
+        if(projectile.x + projectile.radius < 0 || 
+            projectile.x - projectile.radius > canvas.width ||
+            projectile.y + projectile.radius < 0 ||
+            projectile.y - projectile.radius >canvas.height
+            ){
+            setTimeout(() => {
+                projectiles.splice(index,1)
+            }, 0)
+        }
     })
 
     enemies.forEach((enemy, index) => {
@@ -155,6 +165,7 @@ function animate() {
 }
 
 window.addEventListener('click', (event) => { // the click is translated into the event object that has many properties like the client x and y properties
+    console.log(projectiles)
     const angle = Math.atan2(event.clientY - player.y, event.clientX - player.x)
     const velocity = {
         x: Math.cos(angle),
