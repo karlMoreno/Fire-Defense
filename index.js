@@ -2,6 +2,8 @@ const canvas = document.querySelector('canvas')
 canvas.width = innerWidth // window.innerWidth you dont need window
 canvas.height = innerHeight //same thing
 
+const scoreEl = document.querySelector('#scoreEl')
+
 const c = canvas.getContext('2d') //context for canvas api to do graphics for a 2d game
 
 console.log(c)
@@ -151,6 +153,7 @@ function spawnEnemies() {
 
 
 let animationID
+let score = 0 
 
 function animate() {
     animationID = requestAnimationFrame(animate)
@@ -195,6 +198,10 @@ function animate() {
 
             //When Projectiles touch enemy
             if(dist - enemy.radius - projectile.radius < 1 ) {
+                //increase score
+                score += 100
+                scoreEl.innerHTML = score
+
 
                 //create explosions
                 for(let i = 0; i < enemy.radius * 2; i++){
@@ -213,6 +220,9 @@ function animate() {
                         projectiles.splice(projectileIndex,1)
                     }, 0)
                 } else {
+                    // eliminate enemy completely
+                    score += 250
+                    scoreEl.innerHTML = score
                     setTimeout(() => {
                         enemies.splice(index,1)
                         projectiles.splice(projectileIndex,1)
