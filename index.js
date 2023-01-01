@@ -7,6 +7,8 @@ const scoreEl = document.querySelector('#scoreEl')
 const startGameBtn = document.querySelector('#startGameBtn')
 
 const modalEl = document.querySelector('#modal-El')
+const bigScoreEL = document.querySelector('#bigScoreEL')
+
 
 
 const c = canvas.getContext('2d') //context for canvas api to do graphics for a 2d game
@@ -194,6 +196,9 @@ function animate() {
         //end game
         if(dist - enemy.radius - player.radius < 1 ) {
             cancelAnimationFrame(animationID)
+            modalEl.style.display = 'flex'
+            bigScoreEL.innerHTML = score
+
         }
 
 
