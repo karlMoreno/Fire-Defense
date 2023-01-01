@@ -4,6 +4,11 @@ canvas.height = innerHeight //same thing
 
 const scoreEl = document.querySelector('#scoreEl')
 
+const startGameBtn = document.querySelector('#startGameBtn')
+
+const modalEl = document.querySelector('#modal-El')
+
+
 const c = canvas.getContext('2d') //context for canvas api to do graphics for a 2d game
 
 console.log(c)
@@ -247,5 +252,10 @@ window.addEventListener('click', (event) => { // the click is translated into th
     console.log("PEW")
 })
 
-animate()
-spawnEnemies()
+
+startGameBtn.addEventListener('click', () => {
+    animate()
+    spawnEnemies()
+    modalEl.style.display = 'none'
+})
+
