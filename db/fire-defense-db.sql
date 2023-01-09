@@ -1,6 +1,9 @@
-CREATE TABLE Fire-Defense-DB (
-    Player ID int NOT NULL AUTO_INCREMENT,
-    Player Name VAR CHAR,
+CREATE TABLE FireDefenseDB (
+    PlayerID int NOT NULL AUTO_INCREMENT,
+    PlayerName varchar(255),
     Score int,
-    PRIMARY KEY (Player ID)
+    PRIMARY KEY (PlayerID)
 );
+
+
+INSERT INTO FireDefenseDB (PlayerName, Score) VALUES ('NPC', 0);
