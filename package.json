@@ -1,0 +1,24 @@
+{
+  "name": "fire-defense",
+  "version": "1.0.0",
+  "description": "Here is a game that fires and defends and stuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karlMoreno/Fire-Defense.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karlMoreno/Fire-Defense/issues"
+  },
+  "homepage": "https://github.com/karlMoreno/Fire-Defense#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20"
+  }
+}
