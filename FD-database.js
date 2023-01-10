@@ -3,11 +3,10 @@ const { read } = require('fs')
 const app = express()
 const port = 8080
 const mysql = require('mysql')
-const { createConnection } = require('net')
-const { callbackify } = require('util')
+
 
 function readDB (callback) {
-    const conn = createConnection({
+    const conn = mysql.createConnection({
         host: '127.0.0.1',
         user: 'root',
         password: 'students',
@@ -16,12 +15,16 @@ function readDB (callback) {
 
     conn.connect(function err(){
         if (err) throw err
-        conn.query("SELECT * FireDefenseDB", function(err,result,fields){
+        conn.query("SELECT * FROM FireDefenseDB", function(err,result,fields){
             if (err) throw err
             callback(result)
         })
     })
 }
+
+
+
+app.use('/', express.static('public'))
 
 app.get('/init', (req,res) => {
     readDB(function callback(var1){
@@ -29,7 +32,9 @@ app.get('/init', (req,res) => {
     })
 })
 
-app.use('/', express.static('public'))
+app.get('/test', (req,res) => {
+    res.send
+})
 
 app.get('/', (req,res) => {
     res.send('New York, New York')
